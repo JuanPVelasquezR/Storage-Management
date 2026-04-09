@@ -5,8 +5,8 @@ import { setToken } from "../lib/auth";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("admin");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -70,7 +70,7 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-4 text-xs text-slate-400">
-            Por defecto usa <span className="font-mono">admin/admin</span> (configurable por variables de entorno).
+            Bienvenido
           </div>
         </div>
       </div>
