@@ -4,7 +4,7 @@ export default function DashboardPage() {
       <div>
         <h2 className="text-lg font-semibold">Dashboard</h2>
         <p className="mt-1 text-sm text-slate-300">
-          Resumen general. (Los totales se conectarán con la API en el siguiente paso.)
+          Resumen general.
         </p>
       </div>
 
