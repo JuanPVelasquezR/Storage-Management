@@ -34,5 +34,7 @@ public sealed record UpdateProductRequest(
     bool Active
 );
 
+public sealed record UpdateProductActiveRequest(bool Active);
+
 public sealed record PagedResult<T>(IReadOnlyList<T> Items, int Page, int PageSize, int Total);
 

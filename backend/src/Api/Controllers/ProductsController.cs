@@ -151,5 +151,17 @@ public sealed class ProductsController(AppDbContext db) : ControllerBase
         await db.SaveChangesAsync(ct);
         return NoContent();
     }
+
+    [HttpPatch("{id:int}/active")]
+    public async Task<ActionResult> SetActive([FromRoute] int id, [FromBody] UpdateProductActiveRequest req, CancellationToken ct)
+    {
+        var entity = await db.Products.FirstOrDefaultAsync(x => x.Id == id, ct);
+        if (entity is null) return NotFound(new { message = "Producto no encontrado." });
+
+        entity.Active = req.Active;
+        entity.UpdatedAt = DateTimeOffset.UtcNow;
+        await db.SaveChangesAsync(ct);
+        return NoContent();
+    }
 }
 

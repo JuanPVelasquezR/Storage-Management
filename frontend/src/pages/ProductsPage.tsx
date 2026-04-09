@@ -239,19 +239,29 @@ export default function ProductsPage() {
                         Editar
                       </button>
                       <button
-                        className="rounded-lg bg-rose-600/90 px-3 py-1.5 text-xs font-semibold text-white hover:bg-rose-600"
+                        className={[
+                          "rounded-lg px-3 py-1.5 text-xs font-semibold text-white",
+                          p.active
+                            ? "bg-rose-600/90 hover:bg-rose-600"
+                            : "bg-emerald-600/90 hover:bg-emerald-600",
+                        ].join(" ")}
                         onClick={async () => {
-                          if (!confirm(`¿Desactivar "${p.name}"?`)) return;
+                          const nextActive = !p.active;
+                          const actionText = nextActive ? "Activar" : "Desactivar";
+                          if (!confirm(`¿${actionText} "${p.name}"?`)) return;
                           setError(null);
                           try {
-                            await api.delete(`/products/${p.id}`);
+                            await api.patch(`/products/${p.id}/active`, { active: nextActive });
                             await loadProducts(page);
                           } catch (err: any) {
-                            setError(err?.response?.data?.message ?? "No se pudo desactivar.");
+                            setError(
+                              err?.response?.data?.message ??
+                                (nextActive ? "No se pudo activar." : "No se pudo desactivar.")
+                            );
                           }
                         }}
                       >
-                        Desactivar
+                        {p.active ? "Desactivar" : "Activar"}
                       </button>
                     </div>
                   </td>
